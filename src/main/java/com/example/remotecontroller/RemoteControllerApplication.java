@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.awt.*;
-import java.net.*;
-import java.util.Arrays;
-import java.util.Enumeration;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 
 @Slf4j
 @Controller
@@ -31,7 +31,7 @@ public class RemoteControllerApplication {
 				while(interfaceEnum.hasMoreElements()) {
 					for (InterfaceAddress address : interfaceEnum.nextElement().getInterfaceAddresses()) {
 						if (address.getAddress().isSiteLocalAddress()) {
-							log.info("Web-interface is available at: http://" + address.getAddress().getHostAddress() + ":8080");
+                            log.info("Web-interface is available at: http://{}:8080", address.getAddress().getHostAddress());
 						}
 					}
 				}
